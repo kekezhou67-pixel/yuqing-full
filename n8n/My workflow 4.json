@@ -1,0 +1,70 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "alert",
+        "options": {
+          "responseCode": {
+            "values": {}
+          },
+          "responseData": "ok"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "13b21c8e-9ba7-4201-97e4-44b626037d43",
+      "name": "Webhook",
+      "webhookId": "8aaf7a79-27ff-4d7f-9890-6a36d972a4d3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://oapi.dingtalk.com/robot/send?access_token=140b3d9370ca1e1bf5786e69bb7d0aeb98abaef9d2b8631bea29757f5d9a3f0a",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"msgtype\": \"text\",\n  \"text\": {\n    \"content\": \"【舆情告警】\\n标题：{{$json.body.title || $json.title}}\\n内容：{{$json.body.content || $json.content}}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f3b1c997-415f-4d8a-a343-0106f8fd2972",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2d1f4118-9c2a-4b55-8bf5-4bf5d83c2538",
+  "meta": {
+    "instanceId": "0675b670c6dbbf772dc137375b399466987b4503e5955f094ab64e4d4e45f3bd"
+  },
+  "nodeGroups": [],
+  "id": "KMXGzuozOKRsnOSp",
+  "tags": []
+}
